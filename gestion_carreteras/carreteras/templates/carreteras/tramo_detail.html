@@ -1,0 +1,26 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Detalle del Tramo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Detalles del Tramo</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Carretera: {{ tramo.carretera.nombre }}</h5>
+            <p class="card-text"><strong>Inicio:</strong> {{ tramo.comuna_inicio.nombre }} (Km {{ tramo.km_inicio }})</p>
+            <p class="card-text"><strong>Fin:</strong> {{ tramo.comuna_termino.nombre }} (Km {{ tramo.km_termino }})</p>
+            {% if tramo.es_fin_carretera %}
+                <p class="card-text text-danger"><strong>Este es el tramo final de la carretera.</strong></p>
+            {% elif tramo.confluye_con %}
+                <p class="card-text text-info">
+                    <strong>Confluye con:</strong> {{ tramo.confluye_con.nombre }} 
+                    en el Km {{ tramo.km_confluencia }} 
+                    (Tramo en {{ tramo.comuna_confluencia.nombre }})
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{% url 'carretera_list' %}" class="btn btn-secondary mt-4">Volver a la Lista</a>
+</div>
+{% endblock %}

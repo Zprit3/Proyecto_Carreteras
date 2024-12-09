@@ -1,0 +1,29 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Crear/Editar Tramo{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">{% if tramo %}Editar{% else %}Crear{% endif %} Tramo</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="comuna_inicio">Comuna de Inicio</label>
+            <input type="text" name="comuna_inicio" id="comuna_inicio" class="form-control" value="{{ tramo.comuna_inicio if tramo else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="comuna_termino">Comuna de Término</label>
+            <input type="text" name="comuna_termino" id="comuna_termino" class="form-control" value="{{ tramo.comuna_termino if tramo else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="km_inicio">Kilómetro de Inicio</label>
+            <input type="number" name="km_inicio" id="km_inicio" class="form-control" value="{{ tramo.km_inicio if tramo else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="km_termino">Kilómetro de Término</label>
+            <input type="number" name="km_termino" id="km_termino" class="form-control" value="{{ tramo.km_termino if tramo else '' }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    </form>
+</div>
+{% endblock %}

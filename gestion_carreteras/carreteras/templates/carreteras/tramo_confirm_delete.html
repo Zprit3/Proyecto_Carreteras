@@ -1,0 +1,16 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Confirmar Eliminación{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>¿Estás seguro de que quieres eliminar este tramo?</h2>
+    <p><strong>Comuna de Inicio:</strong> {{ tramo.comuna_inicio }}</p>
+    <p><strong>Comuna de Término:</strong> {{ tramo.comuna_termino }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    </form>
+    <a href="{% url 'lista_tramos' tramo.carretera.id %}" class="btn btn-secondary">Cancelar</a>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Detalle de la Carretera{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Detalles de la Carretera</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Nombre: {{ carretera.nombre }}</h5>
+            <p class="card-text"><strong>Categoría:</strong> {{ carretera.categoria.nombre }}</p>
+        </div>
+    </div>
+
+    <h3>Tramos Asociados</h3>
+    {% if carretera.tramo_set.all %}
+        <div class="list-group">
+            {% for tramo in carretera.tramo_set.all %}
+                <a href="{% url 'detalle_tramo' tramo.id %}" class="list-group-item list-group-item-action">
+                    <strong>Inicio:</strong> {{ tramo.comuna_inicio.nombre }} (Km {{ tramo.km_inicio }}) - 
+                    <strong>Fin:</strong> {{ tramo.comuna_termino.nombre }} (Km {{ tramo.km_termino }})
+                    {% if tramo.es_inicio_carretera %}
+                        <span class="badge bg-success">Inicio de carretera</span>
+                    {% elif tramo.es_fin_carretera %}
+                        <span class="badge bg-danger">Fin de carretera</span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Esta carretera no tiene tramos registrados.</p>
+    {% endif %}
+
+    <a href="{% url 'carreteras' %}" class="btn btn-secondary mt-4">Volver a la Lista</a>
+</div>
+{% endblock %}

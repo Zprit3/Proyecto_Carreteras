@@ -1,0 +1,32 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Crear/Editar Carretera{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Crear/Editar Carretera</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ carretera.nombre|default:'' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoría</label>
+            <select class="form-select" id="categoria" name="categoria">
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}" {% if categoria.id == carretera.categoria.id %}selected{% endif %}>{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+            <div class="mt-3">
+                <label for="nueva_categoria" class="form-label">Si no encuentras una categoría, puedes crear una nueva:</label>
+                <input type="text" class="form-control" id="nueva_categoria" name="nueva_categoria" placeholder="Nueva categoría">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'carreteras' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "carreteras/base.html" %}
+
+{% block title %}Lista de Tramos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Tramos de la Carretera "{{ carretera.nombre }}"</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Comuna de Inicio</th>
+                <th>Comuna de Término</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tramo in tramos %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ tramo.comuna_inicio }}</td>
+                <td>{{ tramo.comuna_termino }}</td>
+                <td>
+                    <a href="{% url 'detalle_tramo' tramo.id %}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                    <a href="{% url 'editar_tramo' tramo.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_tramo' tramo.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No hay tramos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'crear_tramo' carretera.id %}" class="btn btn-success">Registrar Nuevo Tramo</a>
+</div>
+{% endblock %}

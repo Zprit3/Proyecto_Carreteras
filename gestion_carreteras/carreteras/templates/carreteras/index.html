@@ -1,0 +1,15 @@
+{% extends 'carreteras/base.html' %}
+
+{% block title %}Inicio - Gestión de Carreteras{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center bg-light p-5 rounded">
+    <h1 class="display-4">Bienvenido a Gestión de Carreteras</h1>
+    <p class="lead">Gestiona las carreteras y sus tramos de manera eficiente.</p>
+    <hr class="my-4">
+    <div>
+        <a href="{% url 'carreteras' %}" class="btn btn-primary btn-lg">Ver Carreteras</a>
+        <a href="/admin/" class="btn btn-secondary btn-lg">Ir al Panel de Administración</a>
+    </div>
+</div>
+{% endblock %}
